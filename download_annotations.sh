@@ -15,7 +15,7 @@ ANNOTATIONS=(
 )
 
 echo "========================================="
-echo "������ Скачивание аннотаций Objects365"
+echo "📥 Скачивание аннотаций Objects365"
 echo "========================================="
 echo "Директория: $ANNOTATION_DIR"
 echo "========================================="
@@ -25,7 +25,7 @@ for url in "${ANNOTATIONS[@]}"; do
     output="$ANNOTATION_DIR/$filename"
     
     echo ""
-    echo "������ Скачивание: $filename"
+    echo "📦 Скачивание: $filename"
     
     # Используем curl
     curl -# -L --retry 9 -C - -o "$output" "$url"
@@ -36,7 +36,7 @@ for url in "${ANNOTATIONS[@]}"; do
         
         # Если это tar.gz архив, распакуем его
         if [[ "$filename" == *.tar.gz ]]; then
-            echo "������ Распаковка $filename..."
+            echo "📦 Распаковка $filename..."
             tar -xzf "$output" -C "$ANNOTATION_DIR"
             if [ $? -eq 0 ]; then
                 echo "✅ Распаковано в $ANNOTATION_DIR"
@@ -53,6 +53,6 @@ done
 
 echo ""
 echo "========================================="
-echo "������ Содержимое $ANNOTATION_DIR:"
+echo "📊 Содержимое $ANNOTATION_DIR:"
 ls -lh "$ANNOTATION_DIR"
 echo "========================================="
