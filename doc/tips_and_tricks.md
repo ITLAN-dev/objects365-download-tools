@@ -34,7 +34,7 @@ seq 0 50 | parallel -j 10 "curl -# -O http://IP:port/images/train/patch{}.tar.gz
 
 ### Windows (без WSL)
 
-#### PowerShell (встроен в Windows 10/11)
+#### PowerShell (встроен в Windows 10/11) очень медленно
 ```powershell
 # Простая загрузка
 0..50 | % { Write-Host "patch$_.tar.gz"; Invoke-WebRequest "http://IP:port/images/train/patch$_.tar.gz" -OutFile "patch$_.tar.gz" }
@@ -49,6 +49,20 @@ md extracted -Force; 0..50 | % { $f="patch$_.tar.gz"; Write-Host $f; Invoke-WebR
 - 🔄 Проходит по индексам от 0 до 50
 - 📥 Скачивает каждый архив с отображением имени
 - 📦 Автоматически распаковывает в папку extracted
+
+**Скачать быстрее можно с помощью wget или curl, пример с wget:**
+
+CMD
+```
+for /l %i in (0,1,50) do (
+    start /b wget http://IP:8000/images/train/patch%i.tar.gz
+)
+```
+PowerShell
+```
+0..50 | % { wget "http://IP:8000/images/train/patch$_.tar.gz" }
+```
+Как установить wget или curl, написано в разделе "Установка необходимых инструментов"
 
 ## 📂 Распаковка архивов
 
